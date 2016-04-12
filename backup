@@ -1,0 +1,21 @@
+#! /usr/bin/env php
+<?php
+
+use M2Digital\Backup\Commands\DatabaseConfigCommand;
+use M2Digital\Backup\Commands\DeleteCommand;
+use M2Digital\Backup\Commands\DropboxGenerateTokenCommand;
+use M2Digital\Backup\Commands\DropboxInitCommand;
+use M2Digital\Backup\Commands\MakeCommand;
+use M2Digital\Backup\Commands\ShowCommand;
+use Symfony\Component\Console\Application;
+
+require 'vendor/autoload.php';
+
+$app = new Application('Custom Database Backup', '1.0');
+$app->add(new DropboxInitCommand);
+$app->add(new DropboxGenerateTokenCommand);
+$app->add(new ShowCommand);
+$app->add(new DatabaseConfigCommand);
+$app->add(new MakeCommand);
+$app->add(new DeleteCommand);
+$app->run();

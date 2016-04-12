@@ -1,0 +1,21 @@
+{
+    "name": "zabaala/php-backup-cli",
+    "description": "Make backups of your mysql database and save them in Dropbox using Symfony Command-Line Component",
+    "require": {
+        "symfony/console": "~2.0",
+        "dropbox/dropbox-sdk": "^1.1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mauricio Rodrigues",
+            "email": "mauricio.vsr@gmail.com"
+        }
+    ],
+    "minimum-stability": "beta",
+    "autoload": {
+        "psr-4": {
+            "M2Digital\\": "src/"
+        }
+    }
+}
