@@ -22,7 +22,7 @@ class DropboxInitCommand extends Command {
      */
     protected function askForKeys(OutputInterface $output)
     {
-        $output->writeln('<info>Go to the https://www.dropbox.com/developers/ and create a new app.</info>');
+        $output->writeln('<info>Go to the https://github.com/zabaala/php-backup-cli and create a new app.</info>');
 
         $appKey = $this->askAQuestion('Enter the App Key');
         $secretKey = $this->askAQuestion('Enter the Secret Key');
