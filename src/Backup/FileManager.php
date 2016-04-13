@@ -220,7 +220,7 @@ class FileManager
         fclose($fileResource);
     }
 
-    public function getBackupFileName() {
-        return sprintf('%s/backup_%s%s.sql', $this->getStoragePath(), date('YmdHis'), uniqid());
+    public function getBackupFileName($type = '') {
+        return sprintf('%s/backup_%s%s.sql'.$type, $this->getStoragePath(), date('YmdHis'), uniqid());
     }
 }

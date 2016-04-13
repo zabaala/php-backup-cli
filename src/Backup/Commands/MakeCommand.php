@@ -5,13 +5,15 @@ use Dropbox\Client;
 use Dropbox\WriteMode;
 use M2Digital\Backup\FileManager;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class MakeCommand extends Command {
     
     public function configure() {
         $this->setName('make')
-              ->setDescription('Make a new backup');
+              ->setDescription('Make a new backup')
+              ->addOption('gzip', null, InputOption::VALUE_OPTIONAL, 'Gzip file');
     }
     
     public function execute(InputInterface $input, OutputInterface $output) {
@@ -20,14 +22,19 @@ class MakeCommand extends Command {
 
         $config = $this->fileManager->getDatabaseConfig();
 
-        $file = $this->fileManager->getBackupFileName();
+        if($input->hasParameterOption('--gzip')){
+            $file = $this->fileManager->getBackupFileName('.gz');
+        }else{
+            $file = $this->fileManager->getBackupFileName();
+        }
 
         $command = sprintf(
-            "mysqldump -h%s -u%s %s %s --routines > %s",
+            "mysqldump -h%s -u%s %s %s --routines %s > %s",
             $config->hostname,
             $config->username,
             property_exists($config, 'password') ? ('-p' . $config->password) : '',
             $config->database,
+            ($input->hasParameterOption('--gzip')) ? '| gzip':'',
             $file
         );
 
